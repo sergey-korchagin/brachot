@@ -1,5 +1,6 @@
 package com.brakhot;
 
+import android.app.DialogFragment;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,8 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.brakhot.dialog.MenuDialog;
+
 public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
+    private DialogFragment mMenuDialogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle(R.string.app_name);
         mToolbar.setBackgroundColor(Color.CYAN);
+        mMenuDialogFragment = new MenuDialog();
 
     }
 
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
 //                return true;
 //            }
             case R.id.action_favorite: {
+                mMenuDialogFragment.show(getFragmentManager(),"mMenuDialogFragment");
                 return true;
             }
             default: {
