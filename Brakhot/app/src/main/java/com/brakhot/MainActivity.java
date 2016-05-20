@@ -18,12 +18,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(R.string.app_name);
-        mToolbar.setBackgroundColor(Color.CYAN);
-        mMenuDialogFragment = new MenuDialog();
 
+        mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+
+        setSupportActionBar(mToolbar);
+        try {
+            getSupportActionBar().setTitle(R.string.app_name);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        mToolbar.setBackgroundColor(Color.CYAN);
+
+        mMenuDialogFragment = new MenuDialog();
     }
 
     @Override
@@ -46,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 //                return true;
 //            }
             case R.id.action_favorite: {
-                mMenuDialogFragment.show(getFragmentManager(),"mMenuDialogFragment");
+                mMenuDialogFragment.show(getFragmentManager(), "mMenuDialogFragment");
                 return true;
             }
             default: {
