@@ -9,21 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.TextView;
 
 import com.brakhot.R;
 import com.brakhot.adapter.MenuDialogAdapter;
+import com.brakhot.interfaces.MainActivityCallbackListener;
+import com.brakhot.interfaces.MenuAdapterCallbackListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MenuDialog extends DialogFragment {
+public class MenuDialog extends DialogFragment implements MenuAdapterCallbackListener {
 
     private static final String TAG = MenuDialog.class.getSimpleName();
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mRecycleViewLayout;
     private MenuDialogAdapter mMenuDialogAdapter;
-    List<String> mMenuItems = new ArrayList<>();
+    private MainActivityCallbackListener mMainActivityCallbackListener;
+
+
 
     @Nullable
     @Override
@@ -35,15 +40,20 @@ public class MenuDialog extends DialogFragment {
         mRecycleViewLayout = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(mRecycleViewLayout);
         mRecyclerView.setHasFixedSize(true);
-        mMenuItems.add("Line 1");
-        mMenuItems.add("Line 2");
-        mMenuItems.add("Line 3");
-        mMenuItems.add("Line 4");
-        mMenuItems.add("Line 5");
-        mMenuItems.add("Line 6");
-        mMenuDialogAdapter = new MenuDialogAdapter(mMenuItems);
+
+        mMenuDialogAdapter = new MenuDialogAdapter( this);
         mRecyclerView.setAdapter(mMenuDialogAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onDialogItemClick(int clickedItemNumber) {
+        mMainActivityCallbackListener.dialogClickedItemData(clickedItemNumber);
+        getDialog().dismiss();
+    }
+
+    public void setMainActivityCallbackListener(MainActivityCallbackListener mainActivityCallbackListener) {
+        mMainActivityCallbackListener = mainActivityCallbackListener;
     }
 }

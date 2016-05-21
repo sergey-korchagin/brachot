@@ -7,12 +7,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.brakhot.dialog.MenuDialog;
+import com.brakhot.interfaces.MainActivityCallbackListener;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainActivityCallbackListener {
     private Toolbar mToolbar;
-    private DialogFragment mMenuDialogFragment;
+    private MenuDialog mMenuDialogFragment;
+    private TextView tmpTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.setBackgroundColor(Color.CYAN);
 
         mMenuDialogFragment = new MenuDialog();
+        mMenuDialogFragment.setMainActivityCallbackListener(this);
+
+        tmpTv = (TextView) findViewById(R.id.textView);
+
     }
 
     @Override
@@ -61,5 +68,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    public void dialogClickedItemData(int clickedItemPosition) {
+        tmpTv.setText("Clicked: " + (clickedItemPosition+1));
     }
 }

@@ -15,4 +15,14 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/textView"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="68dp" />
+
 </RelativeLayout>

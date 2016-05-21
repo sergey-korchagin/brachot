@@ -8,19 +8,29 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.brakhot.R;
+import com.brakhot.interfaces.MenuAdapterCallbackListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by serge_000 on 20/05/2016.
- */
 public class MenuDialogAdapter extends RecyclerView.Adapter<MenuDialogAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<String> mMenuRowNames;
+    private List<String> mMenuRowNames = new ArrayList<>();
+    private MenuAdapterCallbackListener mMenuAdapterCallbackListener;
 
-    public MenuDialogAdapter(List<String> menuRowNames) {
-        mMenuRowNames = menuRowNames;
+    public MenuDialogAdapter( MenuAdapterCallbackListener menuAdapterCallbackListener) {
+
+        mMenuAdapterCallbackListener = menuAdapterCallbackListener;
+        initList();
+    }
+    private void initList(){
+        mMenuRowNames.add("Item 1");
+        mMenuRowNames.add("Item 2");
+        mMenuRowNames.add("Item 3");
+        mMenuRowNames.add("Item 4");
+        mMenuRowNames.add("Item 5");
+        mMenuRowNames.add("Item 6");
     }
 
     @Override
@@ -32,7 +42,7 @@ public class MenuDialogAdapter extends RecyclerView.Adapter<MenuDialogAdapter.Vi
 
     @Override
     public void onBindViewHolder(MenuDialogAdapter.ViewHolder holder, int i) {
-        holder.mMenuItemName.setText(mMenuRowNames.get(i).toString());
+        holder.mMenuItemName.setText(mMenuRowNames.get(i));
     }
 
     @Override
@@ -40,7 +50,8 @@ public class MenuDialogAdapter extends RecyclerView.Adapter<MenuDialogAdapter.Vi
         return mMenuRowNames.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView mMenuItemName;
 
@@ -48,7 +59,14 @@ public class MenuDialogAdapter extends RecyclerView.Adapter<MenuDialogAdapter.Vi
             super(itemView);
 
             mMenuItemName = (TextView) itemView.findViewById(R.id.menuItemTextView);
+            mMenuItemName.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == mMenuItemName.getId()) {
+                mMenuAdapterCallbackListener.onDialogItemClick(getAdapterPosition());
+            }
+        }
     }
 }
