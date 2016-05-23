@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.brakhot.R;
+import com.brakhot.dialog.DialogMenuFullList;
+import com.brakhot.dialog.DialogMenuItem;
 import com.brakhot.interfaces.MenuAdapterCallbackListener;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.List;
 public class MenuDialogAdapter extends RecyclerView.Adapter<MenuDialogAdapter.ViewHolder> {
 
     private Context mContext;
-    private List<String> mMenuRowNames = new ArrayList<>();
+    private List<DialogMenuItem> mMenuRows = new ArrayList<>();
     private MenuAdapterCallbackListener mMenuAdapterCallbackListener;
 
     public MenuDialogAdapter( MenuAdapterCallbackListener menuAdapterCallbackListener) {
@@ -25,12 +27,7 @@ public class MenuDialogAdapter extends RecyclerView.Adapter<MenuDialogAdapter.Vi
         initList();
     }
     private void initList(){
-        mMenuRowNames.add("Item 1");
-        mMenuRowNames.add("Item 2");
-        mMenuRowNames.add("Item 3");
-        mMenuRowNames.add("Item 4");
-        mMenuRowNames.add("Item 5");
-        mMenuRowNames.add("Item 6");
+mMenuRows = DialogMenuFullList.getMenuList();
     }
 
     @Override
@@ -42,30 +39,38 @@ public class MenuDialogAdapter extends RecyclerView.Adapter<MenuDialogAdapter.Vi
 
     @Override
     public void onBindViewHolder(MenuDialogAdapter.ViewHolder holder, int i) {
-        holder.mMenuItemName.setText(mMenuRowNames.get(i));
+        if(!mMenuRows.get(i).getTitle().equals("")){
+            holder.mMenuCategoryName.setText(mMenuRows.get(i).getTitle());
+        }else {
+            holder.mMenuCategoryName.setVisibility(View.GONE);
+        }
+        holder.mMenuItemName.setText(mMenuRows.get(i).getItemText());
     }
 
     @Override
     public int getItemCount() {
-        return mMenuRowNames.size();
+        return mMenuRows.size();
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView mMenuItemName;
+        TextView mMenuCategoryName;
 
         ViewHolder(View itemView) {
             super(itemView);
 
             mMenuItemName = (TextView) itemView.findViewById(R.id.menuItemTextView);
             mMenuItemName.setOnClickListener(this);
+
+            mMenuCategoryName = (TextView)itemView.findViewById(R.id.menuItemTitle);
         }
 
         @Override
         public void onClick(View v) {
             if (v.getId() == mMenuItemName.getId()) {
-                mMenuAdapterCallbackListener.onDialogItemClick(getAdapterPosition());
+                mMenuAdapterCallbackListener.onDialogItemClick(getAdapterPosition(),mMenuRows.get(getAdapterPosition()).getItemText());
             }
         }
     }

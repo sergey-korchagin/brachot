@@ -9,20 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.TextView;
 
 import com.brakhot.R;
 import com.brakhot.adapter.MenuDialogAdapter;
 import com.brakhot.interfaces.MainActivityCallbackListener;
 import com.brakhot.interfaces.MenuAdapterCallbackListener;
 
-import java.util.ArrayList;
-import java.util.List;
 
+public class MenuDialogFragment extends DialogFragment implements MenuAdapterCallbackListener {
 
-public class MenuDialog extends DialogFragment implements MenuAdapterCallbackListener {
-
-    private static final String TAG = MenuDialog.class.getSimpleName();
+    private static final String TAG = MenuDialogFragment.class.getSimpleName();
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mRecycleViewLayout;
     private MenuDialogAdapter mMenuDialogAdapter;
@@ -48,8 +44,8 @@ public class MenuDialog extends DialogFragment implements MenuAdapterCallbackLis
     }
 
     @Override
-    public void onDialogItemClick(int clickedItemNumber) {
-        mMainActivityCallbackListener.dialogClickedItemData(clickedItemNumber);
+    public void onDialogItemClick(int clickedItemNumber,String clickedItemName) {
+        mMainActivityCallbackListener.dialogClickedItemData(clickedItemNumber, clickedItemName);
         getDialog().dismiss();
     }
 

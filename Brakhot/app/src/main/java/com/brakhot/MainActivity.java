@@ -1,6 +1,5 @@
 package com.brakhot;
 
-import android.app.DialogFragment;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,12 +8,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.brakhot.dialog.MenuDialog;
+import com.brakhot.dialog.MenuDialogFragment;
 import com.brakhot.interfaces.MainActivityCallbackListener;
 
 public class MainActivity extends AppCompatActivity implements MainActivityCallbackListener {
     private Toolbar mToolbar;
-    private MenuDialog mMenuDialogFragment;
+    private MenuDialogFragment mMenuDialogFragmentFragment;
     private TextView tmpTv;
 
     @Override
@@ -26,14 +25,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
 
         setSupportActionBar(mToolbar);
         try {
-            getSupportActionBar().setTitle(R.string.app_name);
+            if(getSupportActionBar()!=null){
+                getSupportActionBar().setTitle(R.string.app_name);
+            }
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
         mToolbar.setBackgroundColor(Color.CYAN);
 
-        mMenuDialogFragment = new MenuDialog();
-        mMenuDialogFragment.setMainActivityCallbackListener(this);
+        mMenuDialogFragmentFragment = new MenuDialogFragment();
+        mMenuDialogFragmentFragment.setMainActivityCallbackListener(this);
 
         tmpTv = (TextView) findViewById(R.id.textView);
 
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
 //                return true;
 //            }
             case R.id.action_favorite: {
-                mMenuDialogFragment.show(getFragmentManager(), "mMenuDialogFragment");
+                mMenuDialogFragmentFragment.show(getFragmentManager(), "mMenuDialogFragmentFragment");
                 return true;
             }
             default: {
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
     }
 
     @Override
-    public void dialogClickedItemData(int clickedItemPosition) {
-        tmpTv.setText("Clicked: " + (clickedItemPosition+1));
+    public void dialogClickedItemData(int clickedItemPosition, String clickedItemName) {
+        tmpTv.setText("Clicked: " + clickedItemName);
     }
 }
