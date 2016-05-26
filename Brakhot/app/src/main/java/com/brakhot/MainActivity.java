@@ -1,20 +1,23 @@
 package com.brakhot;
 
 import android.graphics.Color;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
+
+import com.brakhot.adapter.ViewPagerAdapter;
 import com.brakhot.dialog.MenuDialogFragment;
 import com.brakhot.interfaces.MainActivityCallbackListener;
 
 public class MainActivity extends AppCompatActivity implements MainActivityCallbackListener {
     private Toolbar mToolbar;
     private MenuDialogFragment mMenuDialogFragmentFragment;
-    private TextView tmpTv;
+    private ViewPager mPager;
+    private ViewPagerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +25,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
         setContentView(R.layout.activity_main);
 
         mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-
         setSupportActionBar(mToolbar);
         try {
-            if(getSupportActionBar()!=null){
+            if (getSupportActionBar() != null) {
                 getSupportActionBar().setTitle(R.string.app_name);
             }
         } catch (NullPointerException e) {
@@ -33,27 +35,24 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
         }
         mToolbar.setBackgroundColor(Color.CYAN);
 
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mAdapter = new ViewPagerAdapter();
+        mPager.setAdapter(mAdapter);
+
         mMenuDialogFragmentFragment = new MenuDialogFragment();
         mMenuDialogFragmentFragment.setMainActivityCallbackListener(this);
-
-        tmpTv = (TextView) findViewById(R.id.textView);
 
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
 
         switch (id) {
 //            case R.id.action_settings: {
@@ -65,7 +64,6 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
             }
             default: {
                 return super.onOptionsItemSelected(item);
-
             }
         }
 
@@ -73,6 +71,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
 
     @Override
     public void dialogClickedItemData(int clickedItemPosition, String clickedItemName) {
-        tmpTv.setText("Clicked: " + clickedItemName);
+        mPager.setCurrentItem(clickedItemPosition);
     }
+
+    @Override
+    public void onBackPressed() {
+        if (mPager.getCurrentItem() == 0) {
+            super.onBackPressed();
+        } else {
+            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+        }
+    }
+
 }
