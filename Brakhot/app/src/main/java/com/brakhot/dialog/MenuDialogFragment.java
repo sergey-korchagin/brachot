@@ -1,5 +1,6 @@
 package com.brakhot.dialog;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ public class MenuDialogFragment extends DialogFragment implements MenuAdapterCal
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
+
         View view = inflater.inflate(R.layout.dialog_fragment_menu, null);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mRecycleViewLayout = new LinearLayoutManager(view.getContext());
@@ -51,5 +53,12 @@ public class MenuDialogFragment extends DialogFragment implements MenuAdapterCal
 
     public void setMainActivityCallbackListener(MainActivityCallbackListener mainActivityCallbackListener) {
         mMainActivityCallbackListener = mainActivityCallbackListener;
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        return dialog;
+
     }
 }
