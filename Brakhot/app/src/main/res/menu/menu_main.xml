@@ -8,4 +8,10 @@
         android:icon="@android:drawable/star_big_on"
         android:title="test"
         app:showAsAction="ifRoom"/>
+
+    <item android:title="back"
+        android:id="@+id/action_back"
+        android:icon="@android:drawable/ic_menu_set_as"
+        app:showAsAction="always"
+        />
 </menu>

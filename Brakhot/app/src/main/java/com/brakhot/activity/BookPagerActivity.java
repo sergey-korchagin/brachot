@@ -62,6 +62,10 @@ public class BookPagerActivity extends AppCompatActivity implements MainActivity
                 mMenuDialogFragmentFragment.show(getFragmentManager(), "mMenuDialogFragmentFragment");
                 return true;
             }
+            case R.id.action_back:{
+                finish();
+                return true;
+            }
             default: {
                 return super.onOptionsItemSelected(item);
             }
