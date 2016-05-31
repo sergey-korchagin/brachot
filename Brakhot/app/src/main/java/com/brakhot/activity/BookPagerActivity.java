@@ -12,9 +12,9 @@ import android.view.MenuItem;
 import com.brakhot.R;
 import com.brakhot.adapter.ViewPagerAdapter;
 import com.brakhot.dialog.MenuDialogFragment;
-import com.brakhot.interfaces.MainActivityCallbackListener;
+import com.brakhot.interfaces.BookPagerActivityCallbackListener;
 
-public class BookPagerActivity extends AppCompatActivity implements MainActivityCallbackListener {
+public class BookPagerActivity extends AppCompatActivity implements BookPagerActivityCallbackListener {
     private Toolbar mToolbar;
     private MenuDialogFragment mMenuDialogFragmentFragment;
     private ViewPager mPager;
@@ -42,7 +42,7 @@ public class BookPagerActivity extends AppCompatActivity implements MainActivity
         mPager.setAdapter(mAdapter);
 
         mMenuDialogFragmentFragment = new MenuDialogFragment();
-        mMenuDialogFragmentFragment.setMainActivityCallbackListener(this);
+        mMenuDialogFragmentFragment.registerBookPagerActivityCallbackListener(this);
 
     }
 
@@ -62,7 +62,7 @@ public class BookPagerActivity extends AppCompatActivity implements MainActivity
                 mMenuDialogFragmentFragment.show(getFragmentManager(), "mMenuDialogFragmentFragment");
                 return true;
             }
-            case R.id.action_back:{
+            case R.id.action_back: {
                 finish();
                 return true;
             }
@@ -80,11 +80,11 @@ public class BookPagerActivity extends AppCompatActivity implements MainActivity
 
     @Override
     public void onBackPressed() {
-        if (mPager.getCurrentItem() == 0) {
-            super.onBackPressed();
-        } else {
-            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-        }
+//        if (mPager.getCurrentItem() == 0) {
+        super.onBackPressed();
+//        } else {
+//            mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+//        }
     }
 
 

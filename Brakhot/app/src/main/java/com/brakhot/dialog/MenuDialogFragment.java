@@ -13,7 +13,7 @@ import android.view.Window;
 
 import com.brakhot.R;
 import com.brakhot.adapter.MenuDialogAdapter;
-import com.brakhot.interfaces.MainActivityCallbackListener;
+import com.brakhot.interfaces.BookPagerActivityCallbackListener;
 import com.brakhot.interfaces.MenuAdapterCallbackListener;
 
 
@@ -23,7 +23,7 @@ public class MenuDialogFragment extends DialogFragment implements MenuAdapterCal
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mRecycleViewLayout;
     private MenuDialogAdapter mMenuDialogAdapter;
-    private MainActivityCallbackListener mMainActivityCallbackListener;
+    private BookPagerActivityCallbackListener mBookPagerActivityCallbackListener;
 
 
 
@@ -47,12 +47,12 @@ public class MenuDialogFragment extends DialogFragment implements MenuAdapterCal
 
     @Override
     public void onDialogItemClick(int clickedItemNumber,String clickedItemName) {
-        mMainActivityCallbackListener.dialogClickedItemData(clickedItemNumber, clickedItemName);
+        mBookPagerActivityCallbackListener.dialogClickedItemData(clickedItemNumber, clickedItemName);
         getDialog().dismiss();
     }
 
-    public void setMainActivityCallbackListener(MainActivityCallbackListener mainActivityCallbackListener) {
-        mMainActivityCallbackListener = mainActivityCallbackListener;
+    public void registerBookPagerActivityCallbackListener(BookPagerActivityCallbackListener bookPagerActivityCallbackListener) {
+        mBookPagerActivityCallbackListener = bookPagerActivityCallbackListener;
     }
 
     @Override
