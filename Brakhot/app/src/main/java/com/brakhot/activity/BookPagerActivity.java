@@ -40,10 +40,10 @@ public class BookPagerActivity extends AppCompatActivity implements BookPagerAct
         mPager = (ViewPager) findViewById(R.id.pager);
         mAdapter = new ViewPagerAdapter();
         mPager.setAdapter(mAdapter);
+        mPager.setCurrentItem(mAdapter.getCount()-1);
 
         mMenuDialogFragmentFragment = new MenuDialogFragment();
         mMenuDialogFragmentFragment.registerBookPagerActivityCallbackListener(this);
-
     }
 
     @Override
