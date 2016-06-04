@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.brakhot.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ViewPagerAdapter extends PagerAdapter {
@@ -20,6 +21,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         for (int i = 1; i < 12; i++) {
             mPages.add("Page" + i);
         }
+        Collections.reverse(mPages);
     }
 
     @Override
