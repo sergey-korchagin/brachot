@@ -3,6 +3,7 @@ package com.brakhot.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,16 +12,23 @@ import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.brakhot.R;
+import com.brakhot.adapter.AdsViewPagerAdapter;
 import com.brakhot.adapter.BookmarksGridAdapter;
+import com.brakhot.adapter.ViewPagerAdapter;
 import com.brakhot.manager.AdsDataManager;
 import com.squareup.picasso.Picasso;
+import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.TitlePageIndicator;
 
 public class ChoiceBookActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
 
     private GridView mGridView;
     private BookmarksGridAdapter mBookmarksGridAdapter;
-    private ImageView tempIV;
+
+    private ViewPager mPager;
+    private AdsViewPagerAdapter mAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,14 +39,14 @@ public class ChoiceBookActivity extends AppCompatActivity implements AdapterView
         mGridView.setAdapter(mBookmarksGridAdapter);
         mGridView.setOnItemClickListener(this);
 
-        tempIV = (ImageView)findViewById(R.id.imageView);
-        String url = AdsDataManager.getInstance().getAdvertiseItemsList().get(1).getUrl();
-        Picasso.with(this)
-                .load(url)
-                .resize(70,70)
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
-                .into(tempIV);
+
+        mPager = (ViewPager) findViewById(R.id.ads_pager);
+        mAdapter = new AdsViewPagerAdapter(this);
+        mPager.setAdapter(mAdapter);
+
+        CirclePageIndicator titleIndicator = (CirclePageIndicator) findViewById(R.id.titles);
+        titleIndicator.setRadius(14);
+        titleIndicator.setViewPager(mPager);
 
     }
 

@@ -20,6 +20,7 @@ import com.brakhot.manager.AdsDataManager;
 import java.util.Map;
 
 public class SplashScreenActivity extends AppCompatActivity {
+    private static final String TAG = SplashScreenActivity.class.getSimpleName();
     private static final String APP_ID = "4881BFCC-812C-1252-FF39-934E74AE8000";
     private static final String SECRET_KEY = "927023F8-39AF-EF4B-FFF8-0F8E410D6900";
     private AdsDataManager mAdsDataManager;
@@ -50,8 +51,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void handleResponse(BackendlessCollection<Map> mapBackendlessCollection) {
                 Log.d(SplashScreenActivity.class.getSimpleName(), "YES");
                 for (int i = 0; i < mapBackendlessCollection.getCurrentPage().size(); i++) {
-                    Log.w(SplashScreenActivity.class.getSimpleName(), mapBackendlessCollection.getCurrentPage().get(i).get("ad_text").toString());
-                    Log.w(SplashScreenActivity.class.getSimpleName(), mapBackendlessCollection.getCurrentPage().get(i).get("image").toString());
+                    Log.v(TAG, mapBackendlessCollection.getCurrentPage().get(i).get("ad_text").toString());
+                    Log.v(TAG, mapBackendlessCollection.getCurrentPage().get(i).get("image").toString());
 
                     mAdsDataManager.addItemToList(mapBackendlessCollection.getCurrentPage().get(i).get("ad_text").toString(), mapBackendlessCollection.getCurrentPage().get(i).get("image").toString());
                 }
@@ -60,8 +61,10 @@ public class SplashScreenActivity extends AppCompatActivity {
 
             @Override
             public void handleFault(BackendlessFault backendlessFault) {
-                Log.d(SplashScreenActivity.class.getSimpleName(), "No");
-
+                Log.w(TAG, "Error reading data from server");
+                //need to add to list with no internet
+                mAdsDataManager.addItemToList("test", "no url");
+                startMainActivity();
             }
         });
     }

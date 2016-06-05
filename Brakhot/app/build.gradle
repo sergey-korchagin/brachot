@@ -25,4 +25,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile files('libs/backendless.jar')
     compile files('libs/picasso-2.5.2.jar')
+    compile 'fr.baloomba:viewpagerindicator:2.4.2'
 }

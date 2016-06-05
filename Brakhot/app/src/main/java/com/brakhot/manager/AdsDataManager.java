@@ -1,13 +1,13 @@
 package com.brakhot.manager;
 
-import com.brakhot.AdvertiseItem;
+import com.brakhot.items.AdItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdsDataManager {
 
-    private List<AdvertiseItem> mAdvertiseItemsList;
+    private List<AdItem> mAdItemsList;
     private static AdsDataManager ourInstance = new AdsDataManager();
 
     public static AdsDataManager getInstance() {
@@ -15,21 +15,19 @@ public class AdsDataManager {
     }
 
     private AdsDataManager() {
-
-
     }
 
     public void init() {
-        mAdvertiseItemsList = new ArrayList<>();
+        mAdItemsList = new ArrayList<>();
     }
 
     public void addItemToList(String adText, String url) {
-        AdvertiseItem advertiseItem = new AdvertiseItem(adText, url);
-        mAdvertiseItemsList.add(advertiseItem);
+        AdItem adItem = new AdItem(adText, url);
+        mAdItemsList.add(adItem);
     }
 
-    public List<AdvertiseItem> getAdvertiseItemsList() {
-        return mAdvertiseItemsList;
+    public List<AdItem> getAdvertiseItemsList() {
+        return mAdItemsList;
     }
 
 }
