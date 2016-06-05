@@ -44,11 +44,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
-    <com.viewpagerindicator.CirclePageIndicator
+    <com.viewpagerindicator.LinePageIndicator
         android:id="@+id/titles"
-        android:layout_gravity="top"
+        android:layout_gravity="center"
         android:background="@color/red_test"
-        android:layout_height="20dp"
+        android:layout_height="30dp"
         android:layout_width="match_parent" />
 
 </LinearLayout>

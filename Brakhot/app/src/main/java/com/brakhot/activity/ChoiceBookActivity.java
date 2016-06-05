@@ -3,6 +3,7 @@ package com.brakhot.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.brakhot.R;
 import com.brakhot.adapter.AdsViewPagerAdapter;
@@ -18,6 +20,7 @@ import com.brakhot.adapter.ViewPagerAdapter;
 import com.brakhot.manager.AdsDataManager;
 import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
+import com.viewpagerindicator.LinePageIndicator;
 import com.viewpagerindicator.TitlePageIndicator;
 
 public class ChoiceBookActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -44,8 +47,8 @@ public class ChoiceBookActivity extends AppCompatActivity implements AdapterView
         mAdapter = new AdsViewPagerAdapter(this);
         mPager.setAdapter(mAdapter);
 
-        CirclePageIndicator titleIndicator = (CirclePageIndicator) findViewById(R.id.titles);
-        titleIndicator.setRadius(14);
+        LinePageIndicator titleIndicator = (LinePageIndicator) findViewById(R.id.titles);
+        titleIndicator.setLineWidth(15);
         titleIndicator.setViewPager(mPager);
 
     }
@@ -53,7 +56,7 @@ public class ChoiceBookActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(ChoiceBookActivity.this, BookPagerActivity.class);
-        intent.putExtra("id", "book " + (position+1));
+        intent.putExtra("id", "book " + (position + 1));
         startActivity(intent);
 //        overridePendingTransition(android.R.anim.fade_out, android.R.anim.fade_out);
 

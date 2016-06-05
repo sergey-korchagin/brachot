@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.brakhot.R;
 import com.brakhot.items.AdItem;
@@ -50,7 +51,12 @@ public class AdsViewPagerAdapter extends PagerAdapter {
                 .placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
                 .into(imageView);
-
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
         return root;
     }
 }
