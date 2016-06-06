@@ -48,7 +48,7 @@ public class ChoiceBookActivity extends AppCompatActivity implements AdapterView
         mPager.setAdapter(mAdapter);
 
         LinePageIndicator titleIndicator = (LinePageIndicator) findViewById(R.id.titles);
-        titleIndicator.setLineWidth(15);
+        titleIndicator.setLineWidth(30);
         titleIndicator.setViewPager(mPager);
 
     }

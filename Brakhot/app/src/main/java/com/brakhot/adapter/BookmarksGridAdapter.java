@@ -13,9 +13,6 @@ import com.brakhot.R;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by serge_000 on 31/05/2016.
- */
 public class BookmarksGridAdapter extends BaseAdapter {
     private Context context;
     private List<String> mGridItemsList = new ArrayList<>();

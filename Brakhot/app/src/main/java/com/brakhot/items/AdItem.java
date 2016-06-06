@@ -14,7 +14,7 @@ public class AdItem {
         this.mImageUrl = mUrl;
     }
 
-    public String getAdText() {
+    public String getAdLink() {
         return mAdUrl;
     }
 
@@ -22,7 +22,7 @@ public class AdItem {
         this.mAdUrl = mAdText;
     }
 
-    public String getUrl() {
+    public String getImageUrl() {
         return mImageUrl;
     }
 

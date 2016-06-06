@@ -9,9 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.backendless.BackendlessCollection;
-import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
-import com.backendless.async.callback.BackendlessCallback;
 import com.backendless.exceptions.BackendlessFault;
 import com.brakhot.R;
 import com.backendless.Backendless;
@@ -38,22 +36,19 @@ public class SplashScreenActivity extends AppCompatActivity {
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-                getRegisterUser();
+                getAdsData();
 
             }
         }, 1000);
     }
 
-    private void getRegisterUser() {
-
+    private void getAdsData() {
         Backendless.Persistence.of("advertising").find(new AsyncCallback<BackendlessCollection<Map>>() {
             @Override
             public void handleResponse(BackendlessCollection<Map> mapBackendlessCollection) {
-                Log.d(SplashScreenActivity.class.getSimpleName(), "YES");
                 for (int i = 0; i < mapBackendlessCollection.getCurrentPage().size(); i++) {
                     Log.v(TAG, mapBackendlessCollection.getCurrentPage().get(i).get("ad_text").toString());
                     Log.v(TAG, mapBackendlessCollection.getCurrentPage().get(i).get("image").toString());
-
                     mAdsDataManager.addItemToList(mapBackendlessCollection.getCurrentPage().get(i).get("ad_text").toString(), mapBackendlessCollection.getCurrentPage().get(i).get("image").toString());
                 }
                 startMainActivity();
